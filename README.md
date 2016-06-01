@@ -1,20 +1,22 @@
-# PatternMatchVsDataStruct
+I wanted to compare the time taken to do lookups based on pattern matching vs lookups in a Map
 
-**TODO: Add description**
+Phoenix uses function based pattern matches to resolve routes, I wanted to check how performant
+lookups are based on a map vs based on function calls
 
-## Installation
+Output on my computer for 10_000 strings
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+  Map based lookup takes 10987us which is 0.01 seconds
+  Function based pattern match lookup takes 28171us which is 0.028 seconds
 
-  1. Add pattern_match_vs_data_struct to your list of dependencies in `mix.exs`:
+    pattern_match_vs_data_struct $ mix run -e PatternMatchVsDataStruct.Serial.DataStructRun.profile
+    Compiled lib/pattern_match_vs_data_struct.ex
+    Generated pattern_match_vs_data_struct app
+    [PatternMatchVsDataStruct.Serial.DataStructRun,
+     {10987,
+      [:iaaa65q, :iaaa6sy, :iaabqda, :iaabu4a, :iaabsha, :iaabz5a, :iaack3i, ...]}]
 
-        def deps do
-          [{:pattern_match_vs_data_struct, "~> 0.0.1"}]
-        end
-
-  2. Ensure pattern_match_vs_data_struct is started before your application:
-
-        def application do
-          [applications: [:pattern_match_vs_data_struct]]
-        end
-
+    pattern_match_vs_data_struct $ mix run -e PatternMatchVsDataStruct.Serial.PatternRun.profile
+    Compiled lib/pattern_match_vs_data_struct.ex
+    [PatternMatchVsDataStruct.Serial.PatternRun,
+     {28171,
+      [:iaabcty, :iaablna, :iaabsaa, :iaaai3q, :iaabeka, :iaacmaq, :iaacaia, ...]}]
